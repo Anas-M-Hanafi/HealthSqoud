@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Chat HealthCare</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="header">
+          <h1>AI Chat HealthCare</h1>
+          <h2>Hello, There</h2>
+          <p>Hello! How can I support your healthcare</p>
+        </div>
+
+        <div class="chat_list"></div>
+
+        <form action="#" class="typing-form">
+          <div class="input-wrapper">
+            <input
+              type="text"
+              class="typing-input"
+              placeholder="Enter a Prompt here"
+              required
+            />
+            <button type="submit"><i class="fa-solid fa-arrow-up"></i></button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <script src="Chat Bot.js"></script>
+    <style>
+      /* Import Google Font - Poppins */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #2c2d3f;
+      }
+
+      section {
+        height: 100vh;
+      }
+
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+
+      .container .header {
+        padding-top: 50px;
+        text-align: center;
+      }
+
+      .container .header h1 {
+        font-size: 3em; /* استخدام em لوحدات الخط */
+        background: linear-gradient(to right, #4285fa, #d96570);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 1.5em; /* استخدام em للهوامش */
+      }
+
+      .container .header h2 {
+        font-size: 2.5em; /* استخدام em لوحدات الخط */
+        color: #e3e3e3;
+      }
+
+      .container .header p {
+        color: #a6a6a6;
+        font-size: 1.2em; /* استخدام em لوحدات الخط */
+      }
+
+      .typing-form {
+        margin-top: -10%;
+      }
+
+      .input-wrapper {
+        display: flex;
+        align-items: center;
+        border-radius: 25px;
+        padding: 0.3em 0.6em; /* استخدام em للتباعد */
+        background: #757575;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s;
+      }
+
+      .typing-input {
+        flex: 1;
+        padding: 0.6em; /* استخدام em للتباعد */
+        border: none;
+        border-radius: 25px;
+        outline: none;
+        background: #757575;
+        font-size: 1em; /* استخدام em لوحدات الخط */
+        color: #fff;
+      }
+
+      .input-wrapper button {
+        background: transparent;
+        border: none;
+        padding: 0.6em; /* استخدام em للتباعد */
+        cursor: pointer;
+        color: rgb(0, 0, 0);
+        transition: 0.3s ease-in-out;
+        opacity: 0;
+      }
+
+      .typing-form .input-wrapper input:valid ~ button {
+        opacity: 1;
+      }
+
+      .input-wrapper button i {
+        font-size: 1.1em; /* استخدام em لوحدات الخط */
+      }
+
+      .input-wrapper button:hover {
+        color: #fdfdfd;
+      }
+
+      .chat_list {
+        margin-top: 3em; /* استخدام em للهوامش */
+        height: auto;
+        padding-bottom: 6em; /* استخدام em للتباعد */
+      }
+
+      .chat_list .message {
+        margin-bottom: 1.5em; /* استخدام em للهوامش */
+      }
+
+      .chat_list .message_content {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6em; /* استخدام em للتباعد */
+      }
+
+      .chat_list .message_content img {
+        width: 3em; /* استخدام em لوحدات القياس */
+        height: 3em; /* استخدام em لوحدات القياس */
+        border-radius: 50%;
+        object-fit: cover;
+        align-self: flex-start;
+        margin-top: 0.3em; /* استخدام em للهوامش */
+        margin-top: -1.2em; /* استخدام em للهوامش */
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 8em; /* استخدام em للتباعد */
+        margin-bottom: 3%;
+      }
+
+      .chat_list .message_content .text {
+        color: #e3e3e3;
+        white-space: pre-wrap;
+      }
+
+      .chat_list .message i {
+        color: #444;
+        cursor: pointer;
+        margin-left: 3em; /* استخدام em للهوامش */
+        font-size: 1.2em; /* استخدام em لوحدات الخط */
+        margin-top: 0.3em; /* استخدام em للهوامش */
+        transition: 0.3s;
+      }
+
+      .chat_list .message i:hover {
+        color: #e3e3e3;
+      }
+
+      .chat_list .message .loading_indicator {
+        /* تصحيح اسم الفئة */
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 0.1em; /* استخدام em للتباعد */
+      }
+
+      .chat_list .message.loading .loading_indicator {
+        /* تصحيح اسم الفئة */
+        display: flex;
+      }
+
+      .chat_list .message .loading_indicator .loading_Bar {
+        height: 0.7em; /* استخدام em لوحدات القياس */
+        width: 100%;
+        border-radius: 5px; /* زوايا ناعمة */
+        background: linear-gradient(to right, #4285fa, #242424, #4285fa);
+        background-size: 200% 100%;
+        animation: loading 3s linear infinite;
+      }
+
+      /* حركة التحميل */
+      @keyframes loading {
+        0% {
+          background-position: -100% 0;
+        }
+        100% {
+          background-position: 100% 0;
+        }
+      }
+
+      .chat_list .message .loading .loading_Bar:last-child {
+        /* تصحيح اسم الفئة */
+        width: 70%;
+      }
+    </style>
+  </body>
+</html>
